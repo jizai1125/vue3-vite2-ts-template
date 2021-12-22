@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import colors from 'colors-console'
+import styleImport from 'vite-plugin-style-import'
 
 const resolvePath = (path) => resolve(__dirname, path)
 
@@ -13,7 +14,18 @@ export default defineConfig(({ mode }) => {
   const IS_PROD = mode === 'production'
 
   return {
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      styleImport({
+        libs: [
+          {
+            libraryName: 'vant',
+            esModule: true,
+            resolveStyle: (name) => `vant/es/${name}/style/index`
+          }
+        ]
+      })
+    ],
     resolve: {
       alias: {
         '@': resolvePath('src'),
@@ -26,13 +38,13 @@ export default defineConfig(({ mode }) => {
     // 开发服务器配置
     server: {
       // 代理配置
-      proxy: {
-        '^/api': {
-          target: 'https://www.kuaidi100.com',
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
-      }
+      // proxy: {
+      //   '^/api': {
+      //     target: 'https://www.kuaidi100.com',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, '')
+      //   }
+      // }
     },
     // 构建时配置
     build: {
