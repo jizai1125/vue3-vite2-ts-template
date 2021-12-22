@@ -10,8 +10,8 @@
 
 - [vue 3.x](https://v3.cn.vuejs.org/guide/introduction.html)
 - [vite 2.x](https://cn.vitejs.dev/guide/)
-- [pinia 2.x](https://pinia.vuejs.org/introduction.html) 
-- [Vue Router 4.x](https://next.router.vuejs.org/zh/introduction.html) 
+- [pinia 2.x](https://pinia.vuejs.org/introduction.html)
+- [Vue Router 4.x](https://next.router.vuejs.org/zh/introduction.html)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Axios](http://www.axios-js.com/zh-cn/docs/)
 - 代码风格检查约束：ESLint + Prettier、husky + lint-staged
@@ -24,7 +24,7 @@
 
   > 将px单位转换为视口单位的 (vw, vh, vmin, vmax) 的 [PostCSS](https://github.com/postcss/postcss) 插件.
 
-## 搭建步骤
+## 脚手架搭建步骤
 
 [vue3-vite-ts-template 脚手架搭建](https://jizai.notion.site/vue3-vite-ts-template-7f2ee6363e2649ae996418819b9df8ea)
 
