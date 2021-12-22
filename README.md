@@ -1,5 +1,11 @@
 # vue3-vite2-ts-template
 
+## 分支说明
+
+- master：基础模板
+- h5：在 master 基础模板上集成 h5 相关的配置
+- admin：在 master 基础模板上集成管理台相关的配置
+
 ## 推荐开发工具
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
