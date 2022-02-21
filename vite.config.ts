@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import colors from 'colors-console'
 import styleImport from 'vite-plugin-style-import'
 import legacy from '@vitejs/plugin-legacy'
+import viteSvgIcons from 'vite-plugin-svg-icons'
+import { visualizer } from 'rollup-plugin-visualizer'
+import colors from 'colors-console'
 
 const resolvePath = (path) => resolve(__dirname, path)
 
@@ -27,6 +29,12 @@ export default defineConfig(({ mode }) => {
       legacy({
         targets: ['ie >= 11'],
         additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+      }),
+      viteSvgIcons({
+        // 指定 svg 图标文件夹路径
+        iconDirs: [resolvePath('src/assets/icons')],
+        // Specify symbolId format
+        symbolId: 'icon-[dir]-[name]'
       })
     ],
     resolve: {
@@ -59,6 +67,10 @@ export default defineConfig(({ mode }) => {
           drop_console: IS_PROD,
           drop_debugger: true
         }
+      },
+      // Rollup 打包配置
+      rollupOptions: {
+        plugins: [visualizer({ open: true, gzipSize: true })]
       }
     }
   }
