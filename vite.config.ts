@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import colors from 'colors-console'
 import legacy from '@vitejs/plugin-legacy'
+import viteSvgIcons from 'vite-plugin-svg-icons'
+import { visualizer } from 'rollup-plugin-visualizer'
+import colors from 'colors-console'
 
 const resolvePath = (path) => resolve(__dirname, path)
 
@@ -17,6 +19,12 @@ export default defineConfig(({ mode }) => {
       legacy({
         targets: ['ie >= 11'],
         additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+      }),
+      viteSvgIcons({
+        // 指定 svg 图标文件夹路径
+        iconDirs: [resolvePath('src/assets/icons')],
+        // Specify symbolId format
+        symbolId: 'icon-[dir]-[name]'
       })
     ],
     resolve: {
@@ -29,16 +37,16 @@ export default defineConfig(({ mode }) => {
       }
     },
     // 开发服务器配置
-    // server: {
-    //   // 代理配置
-    //   proxy: {
-    //     '^/api': {
-    //       target: 'https://www.kuaidi100.com',
-    //       changeOrigin: true,
-    //       rewrite: (path) => path.replace(/^\/api/, '')
-    //     }
-    //   }
-    // },
+    server: {
+      // 代理配置
+      // proxy: {
+      //   '^/api': {
+      //     target: 'https://www.kuaidi100.com',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, '')
+      //   }
+      // }
+    },
     // 构建时配置
     build: {
       // 非生产环境生成 sourcemap
@@ -49,6 +57,10 @@ export default defineConfig(({ mode }) => {
           drop_console: IS_PROD,
           drop_debugger: true
         }
+      },
+      // Rollup 打包配置
+      rollupOptions: {
+        plugins: [visualizer({ open: true, gzipSize: true })]
       }
     }
   }
